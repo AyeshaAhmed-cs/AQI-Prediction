@@ -26,5 +26,5 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          cd AQI-Predictor/training_pipeline
+          cd training_pipeline
           python train_model.py

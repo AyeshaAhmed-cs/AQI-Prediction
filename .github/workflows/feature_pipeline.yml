@@ -26,6 +26,7 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          cd feature_pipeline
-          python fetch_aqi_hourly.py
-          python feature_engineering.py
+         cd AQI-Predictor/feature_pipeline
+         python fetch_aqi_hourly.py
+         python feature_engineering.py
+

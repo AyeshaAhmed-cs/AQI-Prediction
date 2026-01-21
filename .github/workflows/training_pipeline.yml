@@ -8,6 +8,7 @@ on:
 jobs:
   training-pipeline:
     runs-on: ubuntu-latest
+    timeout-minutes: 30  # give more time for upload
 
     steps:
       - name: Checkout code

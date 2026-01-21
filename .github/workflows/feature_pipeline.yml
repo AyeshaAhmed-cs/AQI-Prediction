@@ -2,7 +2,7 @@ name: Feature Pipeline (Hourly)
 
 on:
   schedule:
-    - cron: '0 * * * *'   # Every hour
+    - cron: '0 * * * *'   # Every hour UTC
   workflow_dispatch:
 
 jobs:
@@ -26,7 +26,6 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-         cd AQI-Predictor/feature_pipeline
-         python fetch_aqi_hourly.py
-         python feature_engineering.py
-
+          cd feature_pipeline
+          python fetch_aqi_hourly.py
+          python feature_engineering.py

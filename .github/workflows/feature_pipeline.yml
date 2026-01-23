@@ -20,12 +20,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas requests hopsworks
+          pip install --upgrade pip
+          pip install pandas requests hopsworks==4.2.*
 
       - name: Run Feature Pipeline
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          cd feature_pipeline
-          python fetch_aqi_hourly.py
-          python feature_engineering.py
+          python feature_pipeline/fetch_aqi_hourly.py
+          python feature_pipeline/feature_engineering.py

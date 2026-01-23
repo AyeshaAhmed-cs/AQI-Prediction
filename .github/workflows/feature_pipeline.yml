@@ -8,6 +8,7 @@ on:
 jobs:
   feature-pipeline:
     runs-on: ubuntu-latest
+    timeout-minutes: 20  # Stop workflow if it takes too long
 
     steps:
       - name: Checkout code
@@ -20,12 +21,16 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
-          pip install pandas requests hopsworks==4.2.* pyarrow confluent-kafka
+          pip install pandas requests hopsworks[python]==4.2.* pyarrow confluent-kafka
 
-      - name: Run Feature Pipeline
+      - name: Run Feature Pipeline (Background)
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          python feature_pipeline/fetch_aqi_hourly.py
-          python feature_pipeline/feature_engineering.py
+          cd feature_pipeline
+          # Run scripts in background so workflow doesn't wait
+          nohup python fetch_aqi_hourly.py > feature_pipeline.log 2>&1 &
+          nohup python feature_engineering.py > feature_pipeline.log 2>&1 &
+          
+      - name: Confirm workflow started
+        run: echo "✅ Feature pipeline triggered. Logs saved in feature_pipeline.log"

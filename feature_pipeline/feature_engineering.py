@@ -1,10 +1,13 @@
+# ================= feature_pipeline/feature_engineering.py =================
 import pandas as pd
 import requests
 from datetime import datetime
 import hopsworks
 import os
 import numpy as np
+from dotenv import load_dotenv
 
+load_dotenv()  
 # ---------------- CONFIG ----------------
 FEATURE_GROUP_NAME = "aqi_features"
 FEATURE_GROUP_VERSION = 2

@@ -1,9 +1,12 @@
+# ================= backfill_pipeline/backfill_one_month.py =================
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 import hopsworks
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 # ---------------- CONFIG ----------------
 FEATURE_GROUP_NAME = "aqi_features"
 FEATURE_GROUP_VERSION = 2

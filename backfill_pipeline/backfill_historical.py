@@ -46,8 +46,6 @@ def engineer_backfill(df):
     df["month"] = df["timestamp"].dt.month
     df["day_of_week"] = df["timestamp"].dt.dayofweek
     df["is_weekend"] = df["day_of_week"].isin([5, 6]).astype(int)
-
-    # MISSING FEATURES: This is what caused your error!
     df["aqi_change"] = df["aqi"].diff().fillna(0.0)
     df["pm25_change_rate"] = df["pm25"].diff().fillna(0.0)
     df["rolling_avg_aqi_24h"] = df["aqi"].rolling(24, min_periods=1).mean().fillna(0.0)
@@ -76,4 +74,4 @@ if __name__ == "__main__":
 
     print("📤 Uploading...")
     fg.insert(df, write_options={"wait_for_job": False}) 
-    print("✅ MISSION SUCCESS! Check your Hopsworks UI.")
+    print("✅ MISSION SUCCESS! Check Hopsworks UI.")

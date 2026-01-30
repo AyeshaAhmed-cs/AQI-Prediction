@@ -21,8 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install hopsworks[python]==4.2.*
-          # Add python-dotenv here!
+          pip install "hopsworks[python]==4.2.*" "protobuf<5.0.0"
           pip install pandas numpy scikit-learn tensorflow joblib pyarrow python-dotenv
 
       - name: Run Training Pipeline

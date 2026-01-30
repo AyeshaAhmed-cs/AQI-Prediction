@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pandas requests hopsworks[python]==4.2.* pyarrow confluent-kafka
+          pip install pandas requests hopsworks[python]==4.2.* pyarrow confluent-kafka python-dotenv
 
       - name: Run Feature Pipeline
         env:

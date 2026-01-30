@@ -23,14 +23,14 @@ jobs:
         run: |
           pip install pandas requests hopsworks[python]==4.2.* pyarrow confluent-kafka
 
-      - name: Run Feature Pipeline (Background)
+      - name: Run Feature Pipeline
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
           cd feature_pipeline
-          # Run scripts in background so workflow doesn't wait
-          nohup python fetch_aqi_hourly.py > feature_pipeline.log 2>&1 &
-          nohup python feature_engineering.py > feature_pipeline.log 2>&1 &
+          # Remove nohup and &, run them sequentially so GitHub waits for completion
+          python fetch_aqi_hourly.py
+          python feature_engineering.py
           
       - name: Confirm workflow started
         run: echo "✅ Feature pipeline triggered. Logs saved in feature_pipeline.log"

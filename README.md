@@ -3,6 +3,7 @@
 
 **Developed by:** ✨ AYESHA AHMED ✨  
 **Status:** 🟢 System Online | **Cycle:** Hourly Updates  
+**Live Dashboard:** [🚀 View Karachi AQI Dashboard](https://aqi-prediction-euemsshkknonwf3vym8fwv.streamlit.app/) 
 
 ---
 
@@ -22,32 +23,36 @@ This system transcends basic prediction by implementing a robust data science fr
 ---
 
 ## 🛠️ System Architecture
+The project is divided into four primary automated pipelines:
 
+### 1. 🔄 Backfill Pipeline (`backfill_pipeline/`)
+* **Historical Grounding:** Ingests and cleanses historical AQI and weather data to create a robust baseline for model training.
+* **Cold Start:** Ensures the feature store has sufficient history to calculate rolling averages and trends from day one.
+* **Data Integrity:** Implements outlier detection to remove faulty sensor readings from the historical record.
 
-The project is divided into three primary automated pipelines:
-
-### 1. 🏗️ Feature Pipeline (`feature_pipeline.py`)
+### 2. 🏗️ Feature Pipeline (`feature_pipeline/`)
 * **Source:** Real-time data ingestion from Open-Meteo & Air Quality APIs.
 * **Logic:** Fetches and prepares atmospheric data hourly.
 * **Feature Store:** Synchronizes processed features to **Hopsworks Feature Store** for model consumption.
 
-### 2. 🧠 Training Pipeline (`training_pipeline.py`)
-* **Training:** Automatically retrains ML models on a daily schedule.
-* **Version Control:** Logs model artifacts (Pickle files) to the **Hopsworks Model Registry**.
+### 3. 🧠 Training Pipeline (`training_pipeline/`)
+* **Training:** Automatically retrains ML models on a scheduled basis.
+* **Version Control:** Logs model artifacts to the **Hopsworks Model Registry**.
 * **Optimization:** Implements feature scaling and missing value imputation for high-accuracy forecasting.
 
-### 3. 📈 Inference & Dashboard (`app.py`)
+### 4. 📈 Inference & Dashboard (`app.py`)
 * **Real-time Prediction:** Pulls the latest model from the registry to forecast the next 72 hours.
 * **UX/UI:** A premium Streamlit dashboard featuring:
-    * **Health Advisory:** Plain-English recommendations for "normal people."
-    * **Expert EDA:** Heatmaps, Boxplots, and Scatter plots for multivariate statistical analysis.
+    * **Health Advisory:** Plain-English recommendations for the general public.
+    * **Expert EDA:** Heatmaps and Priority charts for multivariate statistical analysis.
     * **Hazard Monitor:** A dedicated log for identifying dangerous pollution windows.
 
 ---
 
 # 🚀 Installation & Setup
 ### 1. Clone the repository
-https://github.com/AyeshaAhmed-cs/AQI-Prediction
+```bash
+git clone [https://github.com/AyeshaAhmed-cs/AQI-Prediction](https://github.com/AyeshaAhmed-cs/AQI-Prediction)
 cd AQI-Prediction
 
 
@@ -67,5 +72,6 @@ Benchmark models include:
 
 
 > “Providing data-driven clarity for a cleaner, safer Karachi.”
+
 
 

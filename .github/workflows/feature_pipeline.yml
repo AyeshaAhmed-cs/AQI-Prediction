@@ -9,6 +9,8 @@ jobs:
   feature-pipeline:
     runs-on: ubuntu-latest
     timeout-minutes: 20  # Stop workflow if it takes too long
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout code

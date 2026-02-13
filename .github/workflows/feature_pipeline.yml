@@ -9,8 +9,6 @@ jobs:
   feature-pipeline:
     runs-on: ubuntu-latest
     timeout-minutes: 20  # Stop workflow if it takes too long
-    permissions:
-      contents: write
 
     steps:
       - name: Checkout code
@@ -29,9 +27,10 @@ jobs:
         env:
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
-          # Run scripts using their relative paths from the root
-          python feature_pipeline/fetch_aqi_hourly.py
-          python feature_pipeline/feature_engineering.py
+          cd feature_pipeline
+          # Remove nohup and &, run them sequentially so GitHub waits for completion
+          python fetch_aqi_hourly.py
+          python feature_engineering.py
           
       - name: Confirm workflow started
         run: echo "✅ Feature pipeline triggered. Logs saved in feature_pipeline.log"
